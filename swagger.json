@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sample API Documentation",
+    "version": "1.0.0",
+    "description": "API documentation for the sample application"
+  },
+  "paths": {
+    "/api/agents": {
+      "post": {
+        "summary": "Create a new record in the 'agents' table",
+        "requestBody": {
+          "description": "Data for creating a new agent record",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AGENT_CODE": { "type": "string" },
+                  "AGENT_NAME": { "type": "string" },
+                  "WORKING_AREA": { "type": "string" },
+                  "COMMISSION": { "type": "string" },
+                  "PHONE_NO": { "type": "string" },
+                  "COUNTRY": { "type": "string" }
+                },
+                "required": [
+                  "AGENT_CODE",
+                  "AGENT_NAME",
+                  "WORKING_AREA",
+                  "COMMISSION",
+                  "PHONE_NO",
+                  "COUNTRY"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Record created successfully"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/agents/{agentCode}": {
+      "put": {
+        "summary": "Update a specific record by AGENT_CODE in the 'agents' table",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agentCode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data for updating an agent record",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AGENT_NAME": { "type": "string" },
+                  "WORKING_AREA": { "type": "string" },
+                  "COMMISSION": { "type": "string" },
+                  "PHONE_NO": { "type": "string" },
+                  "COUNTRY": { "type": "string" }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Record updated successfully"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Partially update a specific record by AGENT_CODE in the 'agents' table",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agentCode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data for partially updating an agent record",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "AGENT_NAME": { "type": "string" },
+                  "WORKING_AREA": { "type": "string" },
+                  "COMMISSION": { "type": "string" },
+                  "PHONE_NO": { "type": "string" },
+                  "COUNTRY": { "type": "string" }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Record updated successfully"
+            },
+            "400": {
+              "description": "Bad Request - No valid fields to update"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific record by AGENT_CODE from the 'agents' table",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "agentCode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Record deleted successfully"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
