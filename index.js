@@ -156,6 +156,27 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// Define the /say endpoint
+app.get("/say", async (req, res) => {
+  try {
+    const keyword = req.query.keyword;
+
+    // Forward the request to your Google Cloud Function
+    const response = await axios.get(
+      "https://3lprnmub3c4qeguvbiu2pozrvq0dhtrl.lambda-url.us-east-2.on.aws/",
+      {
+        params: { keyword },
+      }
+    );
+
+    // Return the response from the function
+    res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
 });
